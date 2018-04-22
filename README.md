@@ -22,4 +22,7 @@ The characteristic invariant forms W_{gn} with boundary components {p1,...,pn} c
 
 ```
 TopologicalRecursionForm[1,1,{p1}]
+TopologicalRecursionForm[0,3,{p1,p2,p3}]
+TopologicalRecursionForm[1,2,{p1,p2}]
 ```
+
