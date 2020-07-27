@@ -1,5 +1,5 @@
 # Topological Recursion 
-This is a preliminary not optimized package to compute Eynard Orantin topological recursion invariant forms of a given spectral curve of genus 0, i.e. CP^1. It allows for arbitrary ramifications points. The fundamental form of second kind is fixed and set to be B(z1,z2)=1/(z1-z2)^2. This package runs in parallel with Combinatorica, so they both must be loaded together. 
+This is a preliminary not optimized package to compute Eynard Orantin topological recursion invariant forms of a given spectral curve of genus 0. In this case the fundamental bidifferential is unique. It allows for ramifications points of arbitrary order. This package runs in parallel with Combinatorica, so they both must be loaded together. 
 
 ```
 Needs["Combinatorica`"]
@@ -10,7 +10,7 @@ The two main functions to be used are SetSpectralCurve and TopologicalRecursionF
 
 ### Defining a Spectral Curve
 
-A Spectral Curve contains the data of two maps x(z) and y(z), together with a deck transformation generator around the branchpoints of the covering map x(z). The variable z is a coordinate on CP^1.  
+A Spectral Curve contains the data of two maps x(z) and y(z), together with a global deck transformation that exchanges the leaves around of the covering map x(z) near its ramification points. The variable z is a global coordinate on CP^1.  
 
 ```
 SetSpectralCurve[{x(z),z},{y(z),z},{T(z),z}]
