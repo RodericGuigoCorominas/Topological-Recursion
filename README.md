@@ -31,5 +31,5 @@ The number n must match the number of input variables.
 ### Examples
 
 The most simple and important example is the Airy Spectral curve. 
-![Invariants Airy Curve](example)
+![Invariants Airy Curve](example.png)
 
