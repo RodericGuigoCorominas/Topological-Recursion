@@ -2,8 +2,8 @@
 This is a preliminary not optimized package to compute Eynard Orantin topological recursion invariant forms of a given spectral curve of genus 0. In this case the fundamental bidifferential is unique. It allows for ramifications points of arbitrary order. This package runs in parallel with Combinatorica, so they both must be loaded together. 
 
 ```
-Needs["Combinatorica`"]
-Needs["TopologicalRecursion`"]
+<<"Combinatorica`"
+<<"TopologicalRecursion`"
 ```
 
 The two main functions to be used are SetSpectralCurve and TopologicalRecursionForm. 
@@ -30,8 +30,6 @@ The number n must match the number of input variables.
 
 ### Examples
 
-The fundamental example is the Airy Spectral curve. 
-```
-SetSpectralCurve[{z^2,z},{z,z},{-z,z}]
-TopologicalRecursionForm[1,1,{p1}]
-```
+The most simple and important example is the Airy Spectral curve. 
+![Invariants Airy Curve](example)
+

@@ -7,7 +7,7 @@ the fundamental form of second kind is unique.  It allows for branchpoints of an
 
 BeginPackage["TopologicalRecursion`"]
 
-BKernel::usage="BKernel[z,w] gives the form of the Bergmann Kernel. This version is restricted to the case where the spectral curve is CP1."
+BKernel::usage="BKernel[z,w] gives fundamental bidifferential. The default value is the unique such differential on CP1."
 
 dS0::usage="dS0[p,q1] computes an integral required for the recursion kernel"
 
@@ -23,8 +23,8 @@ TopologicalRecursionForm::usage="TopologicalRecursionForm[g,n,p] computes the W[
 
 FreeEnergy::usage="FreeEnergy[g] computes the gth free energy."
 
-SetSpectralCurve::usage="SetSpectralCurve[{x(t),t},{y(t),t},{d(t),t}] defines the underlying spectral curve. The parametrization is given by (x(t),y(t)). 
-The map d(t) is a global generator of the deck transformations that preserve the branchpoints."
+SetSpectralCurve::usage="SetSpectralCurve[{x(t),t},{y(t),t},{d(t),t}] defines the underlying spectral curve. The pair (x(t),y(t)) must be a global parametrization of the curve. 
+The map d(t) is a global generator of the deck transformations that preserve the branchpoints. It will automatically attempt to find the branchpoints, and the corresponding ramification order."
 
 SetArbitraryBasepoint::usage="SetArbitraryBasepoint[p] simplifies computations by setting an arbitrary basepoint on the 
 computation of the recursion Kernel."
@@ -50,7 +50,7 @@ CurlyW[g_Integer,k_Integer,n_Integer,q_List,p_List]:=
 
 TopologicalRecursionForm[g_,n_,p_List]:=FullSimplify[Module[{z},Sum[Residue[Sum[RecursionKernel[p[[1]],Join[{z},d]]
 	CurlyW[g,Length[d]+1,n-1,Join[{z},d],p[[2;;]]],{d,Subsets[Table[Nest[$DeckTransformation,z,i],{i,$Degree-1}],{1,$Degree}]}]
-		,{z,a}],{a,$BranchPoints}]]];
+		,{z,a}],{a,$BranchPoints}]]](*/;Length[p]==n;*)
 
 TopologicalRecursionForm[0,2,{z1_,z2_}]:=BKernel[z1,z2];
 
@@ -58,8 +58,11 @@ TopologicalRecursionForm[-1,n_,p_List]:=0;
 TopologicalRecursionForm[g_,0,p_List]:=0;
 TopologicalRecursionForm[0,1,p_list]:=0;
 
-SetSpectralCurve[{x_,varx_},{y_,vary_},{dt_,vardt_}]:={$X=(x/.{varx->#})&,$Y=(y/.{vary->#})&,
-	$DeckTransformation=(dt/.{vardt->#})&,$BranchPoints=DeleteDuplicates[t/.Solve[$X'[t]==0,t]],$Degree=Length[Solve[$X[t]==$gen,{t}]]};
+SetSpectralCurve[{x_,varx_},{y_,vary_},{dt_,vardt_}]:=($X=(x/.{varx->#})&;
+														$Y=(y/.{vary->#})&;
+														$DeckTransformation=(dt/.{vardt->#})&;
+														$BranchPoints=DeleteDuplicates[t/.Solve[$X'[t]==0,t]];
+														$Degree=Length[Solve[$X[t]==$gen,{t}]];)
 
 FreeEnergy[g_]:=Sum[Residue[Integrate[$Y[t]*$X'[t],{t,o,s}]*TopologicalRecursionForm[g,1,{s}],{s,a}],{a,$BranchPoints}]/(2g-2);
 
